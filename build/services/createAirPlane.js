@@ -7,9 +7,9 @@ exports.updatePlane = updatePlane;
 exports.deletePlane = deletePlane;
 const data_source_1 = require("../database/data-source");
 const Plane_1 = require("../entities/Plane");
-async function createPlane({ modelo, anoFabricacao, capacidade, valorCompra, createdAt }) {
+async function createPlane({ modelo, anoFabricacao, capacidade, valorCompra }) {
     const repo = data_source_1.AppDataSource.getRepository(Plane_1.Plane);
-    const entry = repo.create({ modelo, anoFabricacao, capacidade, valorCompra, createdAt });
+    const entry = repo.create({ modelo, anoFabricacao, capacidade, valorCompra });
     return await repo.save(entry);
 }
 async function getPlanes() {
@@ -20,7 +20,7 @@ async function getPlaneById(id) {
     const repo = data_source_1.AppDataSource.getRepository(Plane_1.Plane);
     return await repo.findOneBy({ id });
 }
-async function updatePlane(id, { modelo, anoFabricacao, capacidade, valorCompra, createdAt }) {
+async function updatePlane(id, { modelo, anoFabricacao, capacidade, valorCompra }) {
     const repo = data_source_1.AppDataSource.getRepository(Plane_1.Plane);
     const entry = await repo.findOneBy({ id });
     if (!entry) {
@@ -30,7 +30,6 @@ async function updatePlane(id, { modelo, anoFabricacao, capacidade, valorCompra,
     entry.anoFabricacao = anoFabricacao;
     entry.capacidade = capacidade;
     entry.valorCompra = valorCompra;
-    entry.createdAt = createdAt;
     return await repo.save(entry);
 }
 async function deletePlane(id) {

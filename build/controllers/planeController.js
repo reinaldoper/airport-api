@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deletePlaneController = exports.updatePlaneController = exports.getPlaneByIdController = exports.getPlanesController = exports.createPlaneController = void 0;
 const createAirPlane_1 = require("../services/createAirPlane");
+const planeSchema_1 = require("../validations/planeSchema");
 /**
  * @description Cria um avião
  * @param {Request} req - Request do Express contendo os dados do avião
@@ -10,13 +11,19 @@ const createAirPlane_1 = require("../services/createAirPlane");
  * @throws {Error} - Erro 500 caso ocorra um erro ao criar o avião
  */
 const createPlaneController = async (req, res) => {
+    const result = planeSchema_1.planeSchema.safeParse(req.body);
+    if (!result.success) {
+        return res.status(400).json({ error: result.error.format() });
+    }
     const { modelo, anoFabricacao, capacidade, valorCompra } = req.body;
     try {
-        const createdAt = new Date();
-        const plane = await (0, createAirPlane_1.createPlane)({ modelo, anoFabricacao, capacidade, valorCompra, createdAt });
+        const plane = await (0, createAirPlane_1.createPlane)({ modelo, anoFabricacao, capacidade, valorCompra });
         return res.status(201).json({ message: "Avião criado com sucesso", data: plane });
     }
     catch (error) {
+        if (error instanceof Error && error.message) {
+            return res.status(404).json({ error: error.message });
+        }
         return res.status(500).json({ error: "Erro ao criar avião" });
     }
 };
@@ -34,6 +41,9 @@ const getPlanesController = async (req, res) => {
         return res.status(200).json({ message: "Avioes obtidos com sucesso", data: planes });
     }
     catch (error) {
+        if (error instanceof Error && error.message) {
+            return res.status(404).json({ error: error.message });
+        }
         return res.status(500).json({ error: "Erro ao obter avioes" });
     }
 };
@@ -50,12 +60,12 @@ const getPlaneByIdController = async (req, res) => {
     const { id } = req.params;
     try {
         const plane = await (0, createAirPlane_1.getPlaneById)(Number(id));
-        if (!plane) {
-            return res.status(404).json({ error: "Avião não encontrado" });
-        }
         return res.status(200).json({ message: "Avião obtido com sucesso", data: plane });
     }
     catch (error) {
+        if (error instanceof Error && error.message) {
+            return res.status(404).json({ error: error.message });
+        }
         return res.status(500).json({ error: "Erro ao obter avião por ID" });
     }
 };
@@ -69,17 +79,20 @@ exports.getPlaneByIdController = getPlaneByIdController;
  * @throws {Error} - Erro 500 caso ocorra um erro ao atualizar o avião
  */
 const updatePlaneController = async (req, res) => {
+    const result = planeSchema_1.planeSchema.safeParse(req.body);
+    if (!result.success) {
+        return res.status(400).json({ error: result.error.format() });
+    }
     const { id } = req.params;
     const { modelo, anoFabricacao, capacidade, valorCompra } = req.body;
     try {
-        const createdAt = new Date();
-        const plane = await (0, createAirPlane_1.updatePlane)(Number(id), { modelo, anoFabricacao, capacidade, valorCompra, createdAt });
-        if (!plane) {
-            return res.status(404).json({ error: "Avião não encontrado" });
-        }
+        const plane = await (0, createAirPlane_1.updatePlane)(Number(id), { modelo, anoFabricacao, capacidade, valorCompra });
         return res.status(200).json({ message: "Avião atualizado com sucesso", data: plane });
     }
     catch (error) {
+        if (error instanceof Error && error.message) {
+            return res.status(404).json({ error: error.message });
+        }
         return res.status(500).json({ error: "Erro ao atualizar avião" });
     }
 };
@@ -96,12 +109,12 @@ const deletePlaneController = async (req, res) => {
     const { id } = req.params;
     try {
         const plane = await (0, createAirPlane_1.deletePlane)(Number(id));
-        if (!plane) {
-            return res.status(404).json({ error: "Avião não encontrado" });
-        }
         return res.status(200).json({ message: "Avião excluído com sucesso", data: plane });
     }
     catch (error) {
+        if (error instanceof Error && error.message) {
+            return res.status(404).json({ error: error.message });
+        }
         return res.status(500).json({ error: "Erro ao excluir avião" });
     }
 };
