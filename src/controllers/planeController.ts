@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { createPlane, getPlanes, getPlaneById, updatePlane, deletePlane } from "../services/createAirPlane";
+import { planeSchema } from "../validations/planeSchema";
 
 
 /**
@@ -10,10 +11,13 @@ import { createPlane, getPlanes, getPlaneById, updatePlane, deletePlane } from "
  * @throws {Error} - Erro 500 caso ocorra um erro ao criar o avião
  */
 export const createPlaneController = async (req: Request, res: Response): Promise<any> => {
+  const result = planeSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({ error: result.error.format() });
+  }
   const { modelo, anoFabricacao, capacidade, valorCompra } = req.body;
   try {
-    const createdAt = new Date();
-    const plane = await createPlane({ modelo, anoFabricacao, capacidade, valorCompra, createdAt });
+    const plane = await createPlane({ modelo, anoFabricacao, capacidade, valorCompra });
     return res.status(201).json({ message: "Avião criado com sucesso", data: plane });
   } catch (error) {
     if (error instanceof Error && error.message) {
@@ -71,11 +75,14 @@ export const getPlaneByIdController = async (req: Request, res: Response): Promi
  * @throws {Error} - Erro 500 caso ocorra um erro ao atualizar o avião
  */
 export const updatePlaneController = async (req: Request, res: Response): Promise<any> => {
+  const result = planeSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({ error: result.error.format() });
+  }
   const { id } = req.params;
   const { modelo, anoFabricacao, capacidade, valorCompra } = req.body;
   try {
-    const createdAt = new Date();
-    const plane = await updatePlane(Number(id), { modelo, anoFabricacao, capacidade, valorCompra, createdAt });
+    const plane = await updatePlane(Number(id), { modelo, anoFabricacao, capacidade, valorCompra });
     return res.status(200).json({ message: "Avião atualizado com sucesso", data: plane });
   } catch (error) {
     if (error instanceof Error && error.message) {

@@ -7,12 +7,11 @@ interface CreatePlaneParams {
   anoFabricacao: number;
   capacidade: number;
   valorCompra: number;
-  createdAt: Date;
 }
-export async function createPlane({ modelo, anoFabricacao, capacidade, valorCompra, createdAt }: CreatePlaneParams) {
+export async function createPlane({ modelo, anoFabricacao, capacidade, valorCompra }: CreatePlaneParams) {
   const repo = AppDataSource.getRepository(Plane);
 
-  const entry = repo.create({ modelo, anoFabricacao, capacidade, valorCompra, createdAt });
+  const entry = repo.create({ modelo, anoFabricacao, capacidade, valorCompra });
   return await repo.save(entry);
 }
 export async function getPlanes() {
@@ -25,7 +24,7 @@ export async function getPlaneById(id: number) {
 
   return await repo.findOneBy({ id });
 }
-export async function updatePlane(id: number, { modelo, anoFabricacao, capacidade, valorCompra, createdAt }: CreatePlaneParams) {
+export async function updatePlane(id: number, { modelo, anoFabricacao, capacidade, valorCompra }: CreatePlaneParams) {
   const repo = AppDataSource.getRepository(Plane);
 
   const entry = await repo.findOneBy({ id });
@@ -36,7 +35,6 @@ export async function updatePlane(id: number, { modelo, anoFabricacao, capacidad
   entry.anoFabricacao = anoFabricacao;
   entry.capacidade = capacidade;
   entry.valorCompra = valorCompra;
-  entry.createdAt = createdAt;
   return await repo.save(entry);
 }
 
