@@ -11,11 +11,11 @@ import {
 
 const router = Router();
 
-router.get('/', getAllEmployees);
-router.post('/', createEmployee);
-router.get('/:id', getEmployeeById);
-router.put('/:id', updateEmployee);
-router.delete('/:id', deleteEmployee);
-router.get('/role/:role', getEmployeesByRole);
+router.get('/employee', getAllEmployees);
+router.post('/employee', createEmployee);
+router.get('/employee/:id', getEmployeeById);
+router.put('/employee/:id', updateEmployee);
+router.delete('/employee/:id', deleteEmployee);
+router.get('/employee/role/:role', getEmployeesByRole);
 
 export default router;

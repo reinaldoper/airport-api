@@ -12,11 +12,11 @@ import {
 
 const router = Router();
 
-router.get('/', getAllFlight);
-router.get('/:id', getFlightByIds);
-router.post('/',  createFlights);
-router.put('/:id',  updateFlights);
-router.delete('/:id', deleteFlights);
-router.get('/airport/:id', getFlightByAirport);
+router.get('/flights', getAllFlight);
+router.get('/flights/:id', getFlightByIds);
+router.post('/flights',  createFlights);
+router.put('/flights/:id',  updateFlights);
+router.delete('/flights/:id', deleteFlights);
+router.get('/flights/airport/:id', getFlightByAirport);
 
 export default router;

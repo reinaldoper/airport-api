@@ -87,11 +87,11 @@ npm run dev
 1. 🛫 Airports
 
 - Método	Rota	Descrição
-- POST	/api/	Criar novo aeroporto
-- GET	/api/	Listar todos os aeroportos
-- GET	/api/:id	Buscar aeroporto por ID
-- PUT	/api/:id	Atualizar aeroporto por ID
-- DELETE	/api/:id	Deletar aeroporto por ID
+- POST	/api/airports	Criar novo aeroporto
+- GET	/api/airports/	Listar todos os aeroportos
+- GET	/api/airports/:id	Buscar aeroporto por ID
+- PUT	/api/airports/:id	Atualizar aeroporto por ID
+- DELETE	/api/airports/:id	Deletar aeroporto por ID
 
 ---
 
@@ -110,11 +110,11 @@ npm run dev
 3. 👤 Passengers
 
 - Método	Rota	Descrição
-- POST	/api/	Criar passageiro
-- GET	/api/	Listar todos os passageiros
-- GET	/api/:id	Buscar passageiro por ID
-- PUT	/api/:id	Atualizar passageiro por ID
-- DELETE	/api/:id	Deletar passageiro por ID
+- POST	/api/passengers	Criar passageiro
+- GET	/api/passengers	Listar todos os passageiros
+- GET	/api/passengers/:id	Buscar passageiro por ID
+- PUT	/api/passengers/:id	Atualizar passageiro por ID
+- DELETE	/api/passengers/:id	Deletar passageiro por ID
 
 ---
 
@@ -122,13 +122,13 @@ npm run dev
 4. 🧾 Tickets
 
 - Método	Rota	Descrição
-- POST	/api/	Criar novo ticket
-- GET	/api/	Listar todos os tickets
-- GET	/api/:id	Buscar ticket por ID
-- PUT	/api/:id	Atualizar ticket por ID
-- DELETE	/api/:id	Deletar ticket por ID
-- GET	/api/flight/:id	Buscar tickets por ID do voo
-- GET	/api/passenger/:id	Buscar tickets por ID do passageiro
+- POST	/api/tickets	Criar novo ticket
+- GET	/api/tickets	Listar todos os tickets
+- GET	/api/tickets/:id	Buscar ticket por ID
+- PUT	/api/tickets/:id	Atualizar ticket por ID
+- DELETE	/api/tickets/:id	Deletar ticket por ID
+- GET	/api/tickets/flight/:id	Buscar tickets por ID do voo
+- GET	/api/tickets/passenger/:id	Buscar tickets por ID do passageiro
 
 ---
 
@@ -136,12 +136,12 @@ npm run dev
 5. 🛩️ Flights
 
 - Método	Rota	Descrição
-- GET	/api/	Listar todos os voos
-- GET	/api/:id	Buscar voo por ID
-- POST	/api/	Criar novo voo
-- PUT	/api/:id	Atualizar voo por ID
-- DELETE	/api/:id	Deletar voo por ID
-- GET	/api/airport/:id	Buscar voos por ID do aeroporto
+- GET	/api/flights/	Listar todos os voos
+- GET	/api/flights/:id	Buscar voo por ID
+- POST	/api/flights/	Criar novo voo
+- PUT	/api/flights/:id	Atualizar voo por ID
+- DELETE	/api/flights/:id	Deletar voo por ID
+- GET	/api/flights/airport/:id	Buscar voos por ID do aeroporto
 
 ---
 
@@ -149,12 +149,12 @@ npm run dev
 6. 👨‍✈️ Employees
 
 - Método	Rota	Descrição
-- GET	/api/	Listar todos os funcionários
-- GET	/api/:id	Buscar funcionário por ID
-- GET	/api/role/:role	Buscar funcionários por cargo (role)
-- POST	/api/	Criar funcionário
-- PUT	/api/:id	Atualizar funcionário por ID
-- DELETE	/api/:id	Deletar funcionário por ID
+- GET	/api/employee	Listar todos os funcionários
+- GET	/api/employee/:id	Buscar funcionário por ID
+- GET	/api/employee/role/:role	Buscar funcionários por cargo (role)
+- POST	/api/employee/	Criar funcionário
+- PUT	/api/employee/:id	Atualizar funcionário por ID
+- DELETE	/api/employee/:id	Deletar funcionário por ID
 
 ---
 

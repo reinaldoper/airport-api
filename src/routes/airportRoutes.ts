@@ -9,10 +9,10 @@ import {
 
 const router = Router();
 
-router.post('/', createAirports);
-router.get('/', getAllAirports);
-router.get('/:id', getAirportByIds);
-router.delete('/:id', deleteAirports);
-router.put('/:id', updateAirports);
+router.post('/airports', createAirports);
+router.get('/airports', getAllAirports);
+router.get('/airports/:id', getAirportByIds);
+router.delete('/airports/:id', deleteAirports);
+router.put('/airports/:id', updateAirports);
 
 export default router;
