@@ -16,6 +16,9 @@ export const createPlaneController = async (req: Request, res: Response): Promis
     const plane = await createPlane({ modelo, anoFabricacao, capacidade, valorCompra, createdAt });
     return res.status(201).json({ message: "Avião criado com sucesso", data: plane });
   } catch (error) {
+    if (error instanceof Error && error.message) {
+      return res.status(404).json({ error: error.message });
+    }
     return res.status(500).json({ error: "Erro ao criar avião" });
   }
 };
@@ -32,6 +35,9 @@ export const getPlanesController = async (req: Request, res: Response): Promise<
     const planes = await getPlanes();
     return res.status(200).json({ message: "Avioes obtidos com sucesso", data: planes });
   } catch (error) {
+    if (error instanceof Error && error.message) {
+      return res.status(404).json({ error: error.message });
+    }
     return res.status(500).json({ error: "Erro ao obter avioes" });
   }
 };
@@ -48,11 +54,11 @@ export const getPlaneByIdController = async (req: Request, res: Response): Promi
   const { id } = req.params;
   try {
     const plane = await getPlaneById(Number(id));
-    if (!plane) {
-      return res.status(404).json({ error: "Avião não encontrado" });
-    }
     return res.status(200).json({ message: "Avião obtido com sucesso", data: plane });
   } catch (error) {
+    if (error instanceof Error && error.message) {
+      return res.status(404).json({ error: error.message });
+    }
     return res.status(500).json({ error: "Erro ao obter avião por ID" });
   }
 };
@@ -70,11 +76,11 @@ export const updatePlaneController = async (req: Request, res: Response): Promis
   try {
     const createdAt = new Date();
     const plane = await updatePlane(Number(id), { modelo, anoFabricacao, capacidade, valorCompra, createdAt });
-    if (!plane) {
-      return res.status(404).json({ error: "Avião não encontrado" });
-    }
     return res.status(200).json({ message: "Avião atualizado com sucesso", data: plane });
   } catch (error) {
+    if (error instanceof Error && error.message) {
+      return res.status(404).json({ error: error.message });
+    }
     return res.status(500).json({ error: "Erro ao atualizar avião" });
   }
 };
@@ -91,11 +97,11 @@ export const deletePlaneController = async (req: Request, res: Response): Promis
   const { id } = req.params;
   try {
     const plane = await deletePlane(Number(id));
-    if (!plane) {
-      return res.status(404).json({ error: "Avião não encontrado" });
-    }
     return res.status(200).json({ message: "Avião excluído com sucesso", data: plane });
   } catch (error) {
+    if (error instanceof Error && error.message) {
+      return res.status(404).json({ error: error.message });
+    }
     return res.status(500).json({ error: "Erro ao excluir avião" });
   }
 };
