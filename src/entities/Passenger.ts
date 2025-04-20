@@ -8,10 +8,10 @@ export class Passenger {
   @Column()
   nome?: string;
 
-  @Column()
+  @Column({ nullable: true, unique: true })
   documentoIdentidade?: string;
 
-  @Column()
+  @Column({ nullable: true, unique: true })
   email?: string;
 
   @CreateDateColumn({ type: 'datetime' })

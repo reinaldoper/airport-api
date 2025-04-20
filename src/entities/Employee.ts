@@ -10,7 +10,7 @@ export class Employee {
   @Column()
   nome?: string;
 
-  @Column()
+  @Column({ nullable: true, unique: true })
   matricula?: string;
 
   @Column({
