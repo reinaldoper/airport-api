@@ -23,11 +23,11 @@ __decorate([
     __metadata("design:type", String)
 ], Passenger.prototype, "nome", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: true, unique: true }),
     __metadata("design:type", String)
 ], Passenger.prototype, "documentoIdentidade", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: true, unique: true }),
     __metadata("design:type", String)
 ], Passenger.prototype, "email", void 0);
 __decorate([
