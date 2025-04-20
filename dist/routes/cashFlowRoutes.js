@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const cashFlowController_1 = require("../controllers/cashFlowController");
+const router = (0, express_1.Router)();
+router.post("/cashFlow", cashFlowController_1.createCashFlowReport);
+router.get("/cashFlow", cashFlowController_1.getCashFlowHistoryController);
+router.get("/cashFlow/:id", cashFlowController_1.getCashFlowByIdController);
+router.delete("/cashFlow/:id", cashFlowController_1.deleteCashFlowController);
+router.put("/cashFlow/:id", cashFlowController_1.updateCashFlowController);
+router.delete("/cashFlow", cashFlowController_1.deleteAllCashFlowsController);
+exports.default = router;
