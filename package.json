@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.ts",
-    "predev": "tsc"
+    "predev": "tsc",
+    "build": "tsc",
+    "start": "node build/server.js"
   },
   "keywords": [],
   "author": "",
