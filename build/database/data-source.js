@@ -10,12 +10,10 @@ const Flight_1 = require("../entities/Flight");
 const Passenger_1 = require("../entities/Passenger");
 const Ticket_1 = require("../entities/Ticket");
 const Employee_1 = require("../entities/Employee");
+const isProd = process.env.NODE_ENV === 'production';
 exports.AppDataSource = new typeorm_1.DataSource({
-    type: "sqlite",
-    database: "./src/database/airport.sqlite",
+    type: 'sqlite',
+    database: isProd ? '/tmp/database.sqlite' : './src/database.sqlite',
+    entities: [Airport_1.Airport, Flight_1.Flight, Plane_1.Plane, Ticket_1.Ticket, Passenger_1.Passenger, Employee_1.Employee, CashFlow_1.CashFlow],
     synchronize: true,
-    logging: false,
-    entities: [Plane_1.Plane, CashFlow_1.CashFlow, Airport_1.Airport, Flight_1.Flight, Passenger_1.Passenger, Ticket_1.Ticket, Employee_1.Employee],
-    migrations: [],
-    subscribers: [],
 });

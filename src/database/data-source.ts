@@ -10,12 +10,11 @@ import { Employee } from "../entities/Employee";
 
 
 
+const isProd = process.env.NODE_ENV === 'production';
+
 export const AppDataSource = new DataSource({
-  type: "sqlite",
-  database: "./src/database/airport.sqlite",
+  type: 'sqlite',
+  database: isProd ? '/tmp/database.sqlite' : './src/database.sqlite',
+  entities: [Airport, Flight, Plane, Ticket, Passenger, Employee, CashFlow],
   synchronize: true,
-  logging: false,
-  entities: [Plane, CashFlow, Airport, Flight, Passenger, Ticket, Employee],
-  migrations: [],
-  subscribers: [],
 });
