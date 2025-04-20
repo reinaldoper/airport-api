@@ -1,5 +1,11 @@
 import { Request, Response } from "express";
-import { createPlane, getPlanes, getPlaneById, updatePlane, deletePlane } from "../services/createAirPlane";
+import { createPlane, 
+  getPlanes, 
+  getPlaneById, 
+  updatePlane, 
+  deletePlane,
+  CreatePlaneParams 
+} from "../services/createAirPlane";
 import { planeSchema } from "../validations/planeSchema";
 
 
@@ -10,7 +16,7 @@ import { planeSchema } from "../validations/planeSchema";
  * @returns {Promise<any>} - Promise com o avião criado
  * @throws {Error} - Erro 500 caso ocorra um erro ao criar o avião
  */
-export const createPlaneController = async (req: Request, res: Response): Promise<any> => {
+export const createPlaneController = async (req: Request, res: Response): Promise<CreatePlaneParams | any> => {
   const result = planeSchema.safeParse(req.body);
   if (!result.success) {
     return res.status(400).json({ error: result.error.format() });
@@ -34,7 +40,7 @@ export const createPlaneController = async (req: Request, res: Response): Promis
  * @returns {Promise<any>} - Promise com a lista de avi es se bem-sucedido
  * @throws {Error} - Erro 500 caso ocorra um erro ao buscar os avi es
  */
-export const getPlanesController = async (req: Request, res: Response): Promise<any> => {
+export const getPlanesController = async (req: Request, res: Response): Promise<CreatePlaneParams | any> => {
   try {
     const planes = await getPlanes();
     return res.status(200).json({ message: "Avioes obtidos com sucesso", data: planes });
@@ -50,11 +56,11 @@ export const getPlanesController = async (req: Request, res: Response): Promise<
  * @description Obtém um avião pelo ID
  * @param {Request} req - Request do Express contendo o parâmetro ID
  * @param {Response} res - Response do Express para enviar o resultado
- * @returns {Promise<any>} - Promise com o avião pelo ID
+ * @returns {Promise<CreatePlaneParams | any>} - Promise com o avião pelo ID
  * @throws {Error} - Erro 404 se o avião n o for encontrado
  * @throws {Error} - Erro 500 caso ocorra um erro ao buscar o avião
  */
-export const getPlaneByIdController = async (req: Request, res: Response): Promise<any> => {
+export const getPlaneByIdController = async (req: Request, res: Response): Promise<CreatePlaneParams | any> => {
   const { id } = req.params;
   try {
     const plane = await getPlaneById(Number(id));
@@ -70,11 +76,11 @@ export const getPlaneByIdController = async (req: Request, res: Response): Promi
  * @description Atualiza um avião
  * @param {Request} req - Request do Express contendo o parâmetro ID
  * @param {Response} res - Response do Express para enviar o resultado
- * @returns {Promise<any>} - Promise com o avião atualizado
+ * @returns {Promise<CreatePlaneParams | any>} - Promise com o avião atualizado
  * @throws {Error} - Erro 404 se o avião n o for encontrado
  * @throws {Error} - Erro 500 caso ocorra um erro ao atualizar o avião
  */
-export const updatePlaneController = async (req: Request, res: Response): Promise<any> => {
+export const updatePlaneController = async (req: Request, res: Response): Promise<CreatePlaneParams | any> => {
   const result = planeSchema.safeParse(req.body);
   if (!result.success) {
     return res.status(400).json({ error: result.error.format() });
@@ -96,11 +102,11 @@ export const updatePlaneController = async (req: Request, res: Response): Promis
  * @description Exclui um avião
  * @param {Request} req - Request do Express contendo o parâmetro ID
  * @param {Response} res - Response do Express para enviar o resultado
- * @returns {Promise<any>} - Promise com o avião excluído
+ * @returns {Promise<CreatePlaneParams | any>} - Promise com o avião excluído
  * @throws {Error} - Erro 404 se o avião n o for encontrado
  * @throws {Error} - Erro 500 caso ocorra um erro ao excluir o avião
  */
-export const deletePlaneController = async (req: Request, res: Response): Promise<any> => {
+export const deletePlaneController = async (req: Request, res: Response): Promise<CreatePlaneParams | any> => {
   const { id } = req.params;
   try {
     const plane = await deletePlane(Number(id));
