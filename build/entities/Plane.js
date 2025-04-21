@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Plane = void 0;
 const CashFlow_1 = require("./CashFlow");
 const Airport_1 = require("./Airport");
+const Passenger_1 = require("./Passenger");
 const typeorm_1 = require("typeorm");
 let Plane = class Plane {
 };
@@ -52,13 +53,17 @@ __decorate([
     __metadata("design:type", Array)
 ], Plane.prototype, "cashFlows", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Airport_1.Airport, (airport) => airport.planes),
+    (0, typeorm_1.ManyToMany)(() => Airport_1.Airport, (airport) => airport.planes),
     __metadata("design:type", Array)
 ], Plane.prototype, "airports", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
 ], Plane.prototype, "airportId", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Passenger_1.Passenger, (passenger) => passenger.planes),
+    __metadata("design:type", Array)
+], Plane.prototype, "passengers", void 0);
 exports.Plane = Plane = __decorate([
     (0, typeorm_1.Entity)()
 ], Plane);

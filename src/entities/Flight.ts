@@ -4,6 +4,7 @@ import {
   Column,
   ManyToOne,
   CreateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import { Plane } from './Plane';
 import { Airport } from './Airport';
@@ -16,10 +17,18 @@ export class Flight {
   id?: number;
 
   @ManyToOne(() => Airport)
+  @JoinColumn({ name: 'origemId' })
   origem?: Airport;
 
+  @Column()
+  origemId?: number;
+
   @ManyToOne(() => Airport)
+  @JoinColumn({ name: 'destinoId' })
   destino?: Airport;
+
+  @Column()
+  destinoId?: number;
 
   @Column('datetime')
   dataHoraPartida?: Date;
@@ -37,5 +46,9 @@ export class Flight {
   registradoEm?: Date;
 
   @ManyToOne(() => Plane, { eager: true })
+  @JoinColumn({ name: 'planeId' })
   plane?: Plane;
+
+  @Column()
+  planeId?: number;
 }

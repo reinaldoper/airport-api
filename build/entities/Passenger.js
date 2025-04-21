@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Passenger = void 0;
 const typeorm_1 = require("typeorm");
+const Plane_1 = require("./Plane");
 let Passenger = class Passenger {
 };
 exports.Passenger = Passenger;
@@ -34,6 +35,14 @@ __decorate([
     (0, typeorm_1.CreateDateColumn)({ type: 'datetime' }),
     __metadata("design:type", Date)
 ], Passenger.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => Plane_1.Plane, (plane) => plane.passengers),
+    __metadata("design:type", Plane_1.Plane)
+], Passenger.prototype, "planes", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Number)
+], Passenger.prototype, "planeId", void 0);
 exports.Passenger = Passenger = __decorate([
     (0, typeorm_1.Entity)()
 ], Passenger);

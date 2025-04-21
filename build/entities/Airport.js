@@ -42,20 +42,13 @@ __decorate([
 ], Airport.prototype, "criadoEm", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => Plane_1.Plane, (plane) => plane.airports),
+    (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], Airport.prototype, "planes", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", Number)
-], Airport.prototype, "planeId", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => CashFlow_1.CashFlow, (cashFlow) => cashFlow.airport),
     __metadata("design:type", Array)
 ], Airport.prototype, "cashFlows", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", Number)
-], Airport.prototype, "cashFlowId", void 0);
 exports.Airport = Airport = __decorate([
     (0, typeorm_1.Entity)()
 ], Airport);

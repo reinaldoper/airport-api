@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from 'typeorm';
+import { Plane } from './Plane';
 
 @Entity()
 export class Passenger {
@@ -16,4 +18,11 @@ export class Passenger {
 
   @CreateDateColumn({ type: 'datetime' })
   createdAt?: Date;
+
+  @ManyToOne(() => Plane, (plane) => plane.passengers)
+  planes?: Plane;
+
+  @Column({ nullable: true })
+  planeId?: number;
+
 }

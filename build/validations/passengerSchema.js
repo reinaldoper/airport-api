@@ -6,4 +6,5 @@ exports.passengerSchema = zod_1.z.object({
     nome: zod_1.z.string().min(1, 'Nome é obrigatório'),
     documentoIdentidade: zod_1.z.string().min(1, 'Documento de identidade é obrigatório'),
     email: zod_1.z.string().email('Email inválido'),
+    planeId: zod_1.z.number().min(1, 'ID do avião é obrigatório'),
 });

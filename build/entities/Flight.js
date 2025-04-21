@@ -22,12 +22,22 @@ __decorate([
 ], Flight.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => Airport_1.Airport),
+    (0, typeorm_1.JoinColumn)({ name: 'origemId' }),
     __metadata("design:type", Airport_1.Airport)
 ], Flight.prototype, "origem", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Flight.prototype, "origemId", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => Airport_1.Airport),
+    (0, typeorm_1.JoinColumn)({ name: 'destinoId' }),
     __metadata("design:type", Airport_1.Airport)
 ], Flight.prototype, "destino", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Flight.prototype, "destinoId", void 0);
 __decorate([
     (0, typeorm_1.Column)('datetime'),
     __metadata("design:type", Date)
@@ -49,8 +59,13 @@ __decorate([
 ], Flight.prototype, "registradoEm", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => Plane_1.Plane, { eager: true }),
+    (0, typeorm_1.JoinColumn)({ name: 'planeId' }),
     __metadata("design:type", Plane_1.Plane)
 ], Flight.prototype, "plane", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Flight.prototype, "planeId", void 0);
 exports.Flight = Flight = __decorate([
     (0, typeorm_1.Entity)()
 ], Flight);

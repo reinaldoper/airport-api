@@ -8,6 +8,7 @@ export interface PassengerData {
   nome: string;
   documentoIdentidade: string;
   email: string;
+  planeId: number;
 }
 
 
@@ -18,11 +19,12 @@ export interface PassengerData {
  * @param email The email of the passenger.
  * @returns A promise resolving to the newly created passenger.
  */
-export async function createPassenger({ nome, documentoIdentidade, email }: PassengerData) {
+export async function createPassenger({ nome, documentoIdentidade, email, planeId }: PassengerData) {
     const passenger = passengerRepo.create({
         nome,
         documentoIdentidade,
         email,
+        planeId
     });
     const createdPassenger = await passengerRepo.save(passenger);
     return createdPassenger;
@@ -57,7 +59,7 @@ export async function getPassengerById(id: number) {
  * @returns A promise resolving to the updated passenger.
  * @throws {Error} If no passenger is found with the given id.
  */
-export async function updatePassenger(id: number, { nome, documentoIdentidade, email }: PassengerData) {
+export async function updatePassenger(id: number, { nome, documentoIdentidade, email, planeId }: PassengerData) {
     const passenger = await getPassengerById(id);
     if (!passenger) {
         throw new Error('Passageiro não encontrado');
@@ -65,6 +67,7 @@ export async function updatePassenger(id: number, { nome, documentoIdentidade, e
     passenger.nome = nome;
     passenger.documentoIdentidade = documentoIdentidade;
     passenger.email = email;
+    passenger.planeId = planeId;
     const updatedPassenger = await passengerRepo.save(passenger);
     return updatedPassenger;
 }

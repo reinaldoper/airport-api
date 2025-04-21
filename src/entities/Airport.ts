@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToMany, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToMany, OneToMany, JoinTable } from 'typeorm';
 import { Plane } from './Plane';
 import { CashFlow } from './CashFlow';
 
@@ -23,14 +23,10 @@ export class Airport {
   criadoEm?: Date;
 
   @ManyToMany(() => Plane, (plane) => plane.airports)
+  @JoinTable()
   planes?: Plane[];
-
-  @Column({ nullable: true })
-  planeId?: number;
 
   @OneToMany(() => CashFlow, (cashFlow) => cashFlow.airport)
   cashFlows?: CashFlow[];
 
-  @Column({ nullable: true })
-  cashFlowId?: number;
 }

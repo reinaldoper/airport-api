@@ -15,11 +15,12 @@ const passengerRepo = data_source_1.AppDataSource.getRepository(Passenger_1.Pass
  * @param email The email of the passenger.
  * @returns A promise resolving to the newly created passenger.
  */
-async function createPassenger({ nome, documentoIdentidade, email }) {
+async function createPassenger({ nome, documentoIdentidade, email, planeId }) {
     const passenger = passengerRepo.create({
         nome,
         documentoIdentidade,
         email,
+        planeId
     });
     const createdPassenger = await passengerRepo.save(passenger);
     return createdPassenger;
@@ -52,7 +53,7 @@ async function getPassengerById(id) {
  * @returns A promise resolving to the updated passenger.
  * @throws {Error} If no passenger is found with the given id.
  */
-async function updatePassenger(id, { nome, documentoIdentidade, email }) {
+async function updatePassenger(id, { nome, documentoIdentidade, email, planeId }) {
     const passenger = await getPassengerById(id);
     if (!passenger) {
         throw new Error('Passageiro não encontrado');
@@ -60,6 +61,7 @@ async function updatePassenger(id, { nome, documentoIdentidade, email }) {
     passenger.nome = nome;
     passenger.documentoIdentidade = documentoIdentidade;
     passenger.email = email;
+    passenger.planeId = planeId;
     const updatedPassenger = await passengerRepo.save(passenger);
     return updatedPassenger;
 }

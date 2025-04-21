@@ -52,7 +52,7 @@ exports.getPlanesController = getPlanesController;
  * @description Obtém um avião pelo ID
  * @param {Request} req - Request do Express contendo o parâmetro ID
  * @param {Response} res - Response do Express para enviar o resultado
- * @returns {Promise<any>} - Promise com o avião pelo ID
+ * @returns {Promise<CreatePlaneParams | any>} - Promise com o avião pelo ID
  * @throws {Error} - Erro 404 se o avião n o for encontrado
  * @throws {Error} - Erro 500 caso ocorra um erro ao buscar o avião
  */
@@ -74,7 +74,7 @@ exports.getPlaneByIdController = getPlaneByIdController;
  * @description Atualiza um avião
  * @param {Request} req - Request do Express contendo o parâmetro ID
  * @param {Response} res - Response do Express para enviar o resultado
- * @returns {Promise<any>} - Promise com o avião atualizado
+ * @returns {Promise<CreatePlaneParams | any>} - Promise com o avião atualizado
  * @throws {Error} - Erro 404 se o avião n o for encontrado
  * @throws {Error} - Erro 500 caso ocorra um erro ao atualizar o avião
  */
@@ -101,7 +101,7 @@ exports.updatePlaneController = updatePlaneController;
  * @description Exclui um avião
  * @param {Request} req - Request do Express contendo o parâmetro ID
  * @param {Response} res - Response do Express para enviar o resultado
- * @returns {Promise<any>} - Promise com o avião excluído
+ * @returns {Promise<CreatePlaneParams | any>} - Promise com o avião excluído
  * @throws {Error} - Erro 404 se o avião n o for encontrado
  * @throws {Error} - Erro 500 caso ocorra um erro ao excluir o avião
  */

@@ -1,6 +1,7 @@
 import { CashFlow } from "./CashFlow";
 import { Airport } from "./Airport";
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from "typeorm";
+import { Passenger } from "./Passenger";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, ManyToMany } from "typeorm";
 
 export type PlaneStatus = "operante" | "manutencao" | "fora_servico";
 
@@ -33,9 +34,13 @@ export class Plane {
   @OneToMany(() => CashFlow, (cashFlow) => cashFlow.plane)
   cashFlows?: CashFlow[];
 
-  @OneToMany(() => Airport, (airport) => airport.planes)
+  @ManyToMany(() => Airport, (airport) => airport.planes)
   airports?: Airport[];
 
   @Column({ nullable: true })
   airportId?: number;
+
+  @OneToMany(() => Passenger, (passenger) => passenger.planes)
+  passengers?: Passenger[];
+
 }
