@@ -54,17 +54,6 @@ export async function getPlaneById(id: number) {
  * @throws {Error} If the plane with the specified ID is not found.
  */
 
-/**
- * Updates an existing plane in the database with the provided details.
- * @param {number} id - The ID of the plane to update.
- * @param {CreatePlaneParams} param1 - Object containing the new attributes of the plane.
- * @param {string} param1.modelo - The new model of the plane.
- * @param {number} param1.anoFabricacao - The new manufacturing year of the plane.
- * @param {number} param1.capacidade - The new capacity of the plane.
- * @param {number} param1.valorCompra - The new purchase value of the plane.
- * @returns {Promise<Plane>} A promise that resolves to the updated plane.
- * @throws {Error} If the plane with the specified ID is not found.
- */
 
 export async function updatePlane(id: number, { modelo, anoFabricacao, capacidade, valorCompra }: CreatePlaneParams) {
   const repo = AppDataSource.getRepository(Plane);
