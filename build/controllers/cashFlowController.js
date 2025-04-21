@@ -19,9 +19,9 @@ const createCashFlowReport = async (req, res) => {
     if (!parse.success) {
         return res.status(400).json({ errors: parse.error.flatten().fieldErrors });
     }
-    const { description, amount, type, planeId } = req.body;
+    const { description, amount, type, planeId, airportId } = req.body;
     try {
-        const repoService = await (0, createCashFlow_1.createCashFlow)({ description, amount, type, planeId });
+        const repoService = await (0, createCashFlow_1.createCashFlow)({ description, amount, type, planeId, airportId });
         if (!repoService) {
             return res.status(404).json({ error: 'Fluxo de caixa não encontrado' });
         }
@@ -99,9 +99,9 @@ async function updateCashFlowController(req, res) {
     if (!parse.success) {
         return res.status(400).json({ errors: parse.error.flatten().fieldErrors });
     }
-    const { description, amount, type, planeId } = req.body;
+    const { description, amount, type, planeId, airportId } = req.body;
     try {
-        const repoService = await (0, createCashFlow_1.updateCashFlow)(Number(id), { description, amount, type, planeId });
+        const repoService = await (0, createCashFlow_1.updateCashFlow)(Number(id), { description, amount, type, planeId, airportId });
         if (!repoService) {
             return res.status(404).json({ error: 'Fluxo de caixa não encontrado' });
         }

@@ -18,14 +18,19 @@ const CashFlow_1 = require("../entities/CashFlow");
  * @returns {Promise<CashFlow>} a promise with the created cash flow entry
  * @throws {Error} if the plane with the given id is not found
  */
-async function createCashFlow({ description, amount, type, planeId }) {
+async function createCashFlow({ description, amount, type, planeId, airportId }) {
     const repo = data_source_1.AppDataSource.getRepository(CashFlow_1.CashFlow);
     const planeRepo = data_source_1.AppDataSource.getRepository('Plane');
     const plane = await planeRepo.findOneBy({ id: planeId });
     if (!plane) {
         throw new Error('Plane not found');
     }
-    const entry = repo.create({ description, amount, type, plane });
+    const airportRepo = data_source_1.AppDataSource.getRepository('Airport');
+    const airport = await airportRepo.findOneBy({ id: airportId });
+    if (!airport) {
+        throw new Error('Airport not found');
+    }
+    const entry = repo.create({ description, amount, type, plane, planeId, airportId });
     return await repo.save(entry);
 }
 /**
@@ -75,11 +80,16 @@ async function getCashFlowById(id) {
  * @returns {Promise<CashFlow>} A promise that resolves to the updated cash flow entry.
  * @throws {Error} If the plane with the given planeId is not found or if the cash flow entry with the given ID is not found.
  */
-async function updateCashFlow(id, { description, amount, type, planeId }) {
+async function updateCashFlow(id, { description, amount, type, planeId, airportId }) {
     const planeRepo = data_source_1.AppDataSource.getRepository('Plane');
     const plane = await planeRepo.findOneBy({ id: planeId });
     if (!plane) {
         throw new Error('Plane not found');
+    }
+    const airportRepo = data_source_1.AppDataSource.getRepository('Airport');
+    const airport = await airportRepo.findOneBy({ id: airportId });
+    if (!airport) {
+        throw new Error('Airport not found');
     }
     const repo = data_source_1.AppDataSource.getRepository(CashFlow_1.CashFlow);
     const entry = await repo.findOneBy({ id });
@@ -91,6 +101,7 @@ async function updateCashFlow(id, { description, amount, type, planeId }) {
     entry.type = type;
     entry.plane = plane;
     entry.planeId = planeId;
+    entry.airportId = airportId;
     entry.createdAt = new Date();
     return await repo.save(entry);
 }
