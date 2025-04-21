@@ -23,9 +23,9 @@ export const createCashFlowReport = async (req: Request, res: Response): Promise
   if (!parse.success) {
     return res.status(400).json({ errors: parse.error.flatten().fieldErrors });
   }
-  const { description, amount, type, planeId } = req.body;
+  const { description, amount, type, planeId, airportId } = req.body;
   try {
-    const repoService = await createCashFlow({ description, amount, type, planeId });
+    const repoService = await createCashFlow({ description, amount, type, planeId, airportId });
     if (!repoService) {
       return res.status(404).json({ error: 'Fluxo de caixa não encontrado' });
     }
@@ -102,9 +102,9 @@ export async function updateCashFlowController(req: Request, res: Response): Pro
   if (!parse.success) {
     return res.status(400).json({ errors: parse.error.flatten().fieldErrors });
   }
-  const { description, amount, type, planeId } = req.body;
+  const { description, amount, type, planeId, airportId } = req.body;
   try {
-    const repoService = await updateCashFlow(Number(id), { description, amount, type, planeId });
+    const repoService = await updateCashFlow(Number(id), { description, amount, type, planeId, airportId });
     if (!repoService) {
       return res.status(404).json({ error: 'Fluxo de caixa não encontrado' });
     }

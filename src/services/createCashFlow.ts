@@ -6,6 +6,7 @@ export interface CreateCashFlowParams {
   description: string;
   amount: number;
   planeId: number;
+  airportId: number;
   type: CashFlowType;
 }
 
@@ -15,14 +16,19 @@ export interface CreateCashFlowParams {
  * @returns {Promise<CashFlow>} a promise with the created cash flow entry
  * @throws {Error} if the plane with the given id is not found
  */
-export async function createCashFlow({ description, amount, type, planeId }: CreateCashFlowParams) {
+export async function createCashFlow({ description, amount, type, planeId, airportId }: CreateCashFlowParams) {
   const repo = AppDataSource.getRepository(CashFlow);
   const planeRepo = AppDataSource.getRepository('Plane');
   const plane = await planeRepo.findOneBy({ id: planeId });
   if (!plane) {
     throw new Error('Plane not found');
   }
-  const entry = repo.create({ description, amount, type, plane });
+  const airportRepo = AppDataSource.getRepository('Airport');
+  const airport = await airportRepo.findOneBy({ id: airportId });
+  if (!airport) {
+    throw new Error('Airport not found');
+  }
+  const entry = repo.create({ description, amount, type, plane, planeId, airportId });
   return await repo.save(entry);
 }
 
@@ -80,11 +86,16 @@ export async function getCashFlowById(id: number) {
  * @throws {Error} If the plane with the given planeId is not found or if the cash flow entry with the given ID is not found.
  */
 
-export async function updateCashFlow(id: number, { description, amount, type, planeId }: CreateCashFlowParams) {
+export async function updateCashFlow(id: number, { description, amount, type, planeId, airportId }: CreateCashFlowParams) {
   const planeRepo = AppDataSource.getRepository('Plane');
   const plane = await planeRepo.findOneBy({ id: planeId });
   if (!plane) {
     throw new Error('Plane not found');
+  }
+  const airportRepo = AppDataSource.getRepository('Airport');
+  const airport = await airportRepo.findOneBy({ id: airportId });
+  if (!airport) {
+    throw new Error('Airport not found');
   }
   const repo = AppDataSource.getRepository(CashFlow);
 
@@ -97,6 +108,7 @@ export async function updateCashFlow(id: number, { description, amount, type, pl
   entry.type = type;
   entry.plane = plane;
   entry.planeId = planeId;
+  entry.airportId = airportId;
   entry.createdAt = new Date();
   return await repo.save(entry);
 }
