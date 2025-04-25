@@ -33,11 +33,11 @@ __decorate([
     __metadata("design:type", Date)
 ], Ticket.prototype, "dataCompra", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => Passenger_1.Passenger),
+    (0, typeorm_1.ManyToOne)(() => Passenger_1.Passenger, { onDelete: "CASCADE" }),
     __metadata("design:type", Passenger_1.Passenger)
 ], Ticket.prototype, "passageiro", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => Flight_1.Flight),
+    (0, typeorm_1.ManyToOne)(() => Flight_1.Flight, { onDelete: "CASCADE" }),
     __metadata("design:type", Flight_1.Flight)
 ], Ticket.prototype, "voo", void 0);
 exports.Ticket = Ticket = __decorate([

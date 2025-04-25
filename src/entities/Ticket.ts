@@ -22,9 +22,9 @@ export class Ticket {
   @CreateDateColumn({ type: 'datetime' })
   dataCompra?: Date;
 
-  @ManyToOne(() => Passenger)
+  @ManyToOne(() => Passenger, { onDelete: "CASCADE" })
   passageiro?: Passenger;
 
-  @ManyToOne(() => Flight)
+  @ManyToOne(() => Flight, { onDelete: "CASCADE" })
   voo?: Flight;
 }
