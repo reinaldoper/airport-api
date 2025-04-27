@@ -7,5 +7,6 @@ export const planeSchema = z.object({
   capacidade: z.number().min(2, 'Capacidade deve ter ao menos 2 lugares'),
   valorCompra: z
     .number()
-    .min(3, 'Valor compra deve ser maior que 3')
+    .min(3, 'Valor compra deve ser maior que 3'),
+  status: z.string().min(1, 'Status deve ter ao menos 1 caractere'),
 });

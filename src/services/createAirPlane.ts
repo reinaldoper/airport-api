@@ -1,12 +1,13 @@
 import { AppDataSource } from '../database/data-source';
 
-import { Plane } from '../entities/Plane';
+import { Plane, PlaneStatus } from '../entities/Plane';
 
 export interface CreatePlaneParams {
   modelo: string;
   anoFabricacao: number;
   capacidade: number;
   valorCompra: number;
+  status: PlaneStatus;
 }
 /**
  * Creates a new plane in the database.
@@ -17,10 +18,10 @@ export interface CreatePlaneParams {
  * @param {number} param0.valorCompra - The purchase value of the plane to create.
  * @returns {Promise<Plane>} A promise that resolves to the newly created Plane entity.
  */
-export async function createPlane({ modelo, anoFabricacao, capacidade, valorCompra }: CreatePlaneParams) {
+export async function createPlane({ modelo, anoFabricacao, capacidade, valorCompra, status }: CreatePlaneParams) {
   const repo = AppDataSource.getRepository(Plane);
 
-  const entry = repo.create({ modelo, anoFabricacao, capacidade, valorCompra });
+  const entry = repo.create({ modelo, anoFabricacao, capacidade, valorCompra, status });
   return await repo.save(entry);
 }
 /**
@@ -55,7 +56,7 @@ export async function getPlaneById(id: number) {
  */
 
 
-export async function updatePlane(id: number, { modelo, anoFabricacao, capacidade, valorCompra }: CreatePlaneParams) {
+export async function updatePlane(id: number, { modelo, anoFabricacao, capacidade, valorCompra, status }: CreatePlaneParams) {
   const repo = AppDataSource.getRepository(Plane);
 
   const entry = await repo.findOneBy({ id });
@@ -66,6 +67,7 @@ export async function updatePlane(id: number, { modelo, anoFabricacao, capacidad
   entry.anoFabricacao = anoFabricacao;
   entry.capacidade = capacidade;
   entry.valorCompra = valorCompra;
+  entry.status = status;
   return await repo.save(entry);
 }
 

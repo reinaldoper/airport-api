@@ -21,9 +21,9 @@ export const createPlaneController = async (req: Request, res: Response): Promis
   if (!result.success) {
     return res.status(400).json({ error: result.error.format() });
   }
-  const { modelo, anoFabricacao, capacidade, valorCompra } = req.body;
+  const { modelo, anoFabricacao, capacidade, valorCompra, status } = req.body;
   try {
-    const plane = await createPlane({ modelo, anoFabricacao, capacidade, valorCompra });
+    const plane = await createPlane({ modelo, anoFabricacao, capacidade, valorCompra, status });
     return res.status(201).json({ message: "Avião criado com sucesso", data: plane });
   } catch (error) {
     if (error instanceof Error && error.message) {
@@ -86,9 +86,9 @@ export const updatePlaneController = async (req: Request, res: Response): Promis
     return res.status(400).json({ error: result.error.format() });
   }
   const { id } = req.params;
-  const { modelo, anoFabricacao, capacidade, valorCompra } = req.body;
+  const { modelo, anoFabricacao, capacidade, valorCompra, status } = req.body;
   try {
-    const plane = await updatePlane(Number(id), { modelo, anoFabricacao, capacidade, valorCompra });
+    const plane = await updatePlane(Number(id), { modelo, anoFabricacao, capacidade, valorCompra, status });
     return res.status(200).json({ message: "Avião atualizado com sucesso", data: plane });
   } catch (error) {
     if (error instanceof Error && error.message) {
