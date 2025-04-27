@@ -21,9 +21,9 @@ export const createPlaneController = async (req: Request, res: Response): Promis
   if (!result.success) {
     return res.status(400).json({ error: result.error.format() });
   }
-  const { modelo, anoFabricacao, capacidade, valorCompra, status } = req.body;
+  const { modelo, anoFabricacao, capacidade, valorCompra } = req.body;
   try {
-    const plane = await createPlane({ modelo, anoFabricacao, capacidade, valorCompra, status });
+    const plane = await createPlane({ modelo, anoFabricacao, capacidade, valorCompra });
     return res.status(201).json({ message: "Avião criado com sucesso", data: plane });
   } catch (error) {
     if (error instanceof Error && error.message) {

@@ -8,5 +8,5 @@ export const planeSchema = z.object({
   valorCompra: z
     .number()
     .min(3, 'Valor compra deve ser maior que 3'),
-  status: z.string().min(1, 'Status deve ter ao menos 1 caractere'),
+  status: z.string().optional(),
 });

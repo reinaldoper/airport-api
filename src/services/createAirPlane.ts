@@ -7,7 +7,7 @@ export interface CreatePlaneParams {
   anoFabricacao: number;
   capacidade: number;
   valorCompra: number;
-  status: PlaneStatus;
+  status?: PlaneStatus;
 }
 /**
  * Creates a new plane in the database.
@@ -18,10 +18,10 @@ export interface CreatePlaneParams {
  * @param {number} param0.valorCompra - The purchase value of the plane to create.
  * @returns {Promise<Plane>} A promise that resolves to the newly created Plane entity.
  */
-export async function createPlane({ modelo, anoFabricacao, capacidade, valorCompra, status }: CreatePlaneParams) {
+export async function createPlane({ modelo, anoFabricacao, capacidade, valorCompra }: CreatePlaneParams) {
   const repo = AppDataSource.getRepository(Plane);
 
-  const entry = repo.create({ modelo, anoFabricacao, capacidade, valorCompra, status });
+  const entry = repo.create({ modelo, anoFabricacao, capacidade, valorCompra });
   return await repo.save(entry);
 }
 /**
