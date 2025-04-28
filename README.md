@@ -170,6 +170,12 @@ npm run dev
 
 ---
 
+⭐ Deixe uma estrela!
+- Se este projeto te ajudou ou te inspirou, deixe uma estrela ⭐ no repositório.
+- Isso ajuda muito na divulgação!
+
+---
+
 ## 📌 Observações
 
 - A aplicação está conectada a um banco SQLite salvo em ./src/database/airport.sqlite.
