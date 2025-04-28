@@ -27,7 +27,6 @@ const airportRepository = AppDataSource.getRepository(Airport);
    */
 export const createAirports = async (req: Request, res: Response): Promise<CreateAirportParams | any> => {
   const parse = airportSchema.safeParse(req.body);
-
   if (!parse.success) {
     return res.status(400).json({ errors: parse.error.flatten().fieldErrors });
   }
@@ -142,6 +141,7 @@ export const getAirportByIds = async (req: Request, res: Response): Promise<Crea
 export const getAllAirports = async (_req: Request, res: Response): Promise<CreateAirportParams | any> => {
   try {
     const airports = await getAirports();
+    console.log(airports);
     return res.status(200).json({ message: 'Aeroportos obtidos com sucesso', data: airports });
   } catch (error) {
     return res.status(500).json({ error: 'Erro ao buscar aeroportos' });
